@@ -32,7 +32,8 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-data-mongodb')
 	compile('org.springframework.boot:spring-boot-starter-data-mongodb-reactive')
 	compile('org.springframework.boot:spring-boot-starter-webflux')
+	compile("org.springframework.boot:spring-boot-devtools")
 	compileOnly('org.projectlombok:lombok')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
-	compile('de.flapdoodle.embed:de.flapdoodle.embed.mongo')
+//	testCompile('de.flapdoodle.embed:de.flapdoodle.embed.mongo')
 }

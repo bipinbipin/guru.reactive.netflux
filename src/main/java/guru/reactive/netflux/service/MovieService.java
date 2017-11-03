@@ -9,7 +9,11 @@ public interface MovieService {
 
     Flux<MovieEvent> events(String movieId);
 
+    Flux<Movie> getStreamAllMovies();
+
     Mono<Movie> getMovieById(String id);
 
     Flux<Movie> getAllMovies();
+
+    Mono<Movie> addMovie(Movie movie);
 }

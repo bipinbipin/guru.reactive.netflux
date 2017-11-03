@@ -2,6 +2,7 @@ package guru.reactive.netflux.domain;
 
 
 import lombok.*;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
@@ -10,6 +11,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @RequiredArgsConstructor
 public class Movie {
 
+    @Id
     private String id;
 
     @NonNull

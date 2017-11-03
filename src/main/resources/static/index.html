@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/oboe-browser.js"></script>
+</head>
+<body>
+    <script>
+
+        oboe('/movies')
+            .done(function(things) {
+                console.log(things);
+                // we got it
+            })
+            .fail(function(e) {
+                console.log("Error")
+                console.log(e);
+                // we don't got it
+            });
+
+    </script>
+
+
+    <script>
+        var source = new EventSource('/movies');
+        source.onmessage = function(e) {
+            document.body.innerHTML += e.data + '<br>';
+        };
+    </script>
+    Hello dude
+</body>
+</html>

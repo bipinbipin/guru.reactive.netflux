@@ -3,11 +3,10 @@ package guru.reactive.netflux.controllers;
 import guru.reactive.netflux.domain.Movie;
 import guru.reactive.netflux.domain.MovieEvent;
 import guru.reactive.netflux.service.MovieService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -31,8 +30,14 @@ public class MovieController {
         return movieService.getMovieById(id);
     }
 
-    @GetMapping
+    @GetMapping(produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     Flux<Movie> getAllMovies() {
-        return movieService.getAllMovies();
+        return movieService.getStreamAllMovies();
+    }
+
+    @PostMapping
+    Mono<ResponseEntity<Movie>> addMovie(@RequestBody Movie movie) {
+        return movieService.addMovie(movie)
+                .map(savedMovie -> new ResponseEntity<Movie>(savedMovie, HttpStatus.CREATED));
     }
 }

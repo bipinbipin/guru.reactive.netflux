@@ -27,6 +27,14 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
+    public Flux<Movie> getStreamAllMovies() {
+//        return Flux.<Movie>generate(movieSynchronousSink -> {
+//            movieSynchronousSink.next(getAllMovies().subscribe()));
+//        });
+        return movieRepository.findWithTailableCursorBy();
+    }
+
+    @Override
     public Mono<Movie> getMovieById(String id) {
         return this.movieRepository.findById(id);
     }
@@ -34,5 +42,10 @@ public class MovieServiceImpl implements MovieService {
     @Override
     public Flux<Movie> getAllMovies() {
         return this.movieRepository.findAll();
+    }
+
+    @Override
+    public Mono<Movie> addMovie(Movie movie) {
+        return this.movieRepository.save(movie);
     }
 }
