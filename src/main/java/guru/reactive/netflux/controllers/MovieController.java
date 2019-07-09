@@ -35,6 +35,11 @@ public class MovieController {
         return movieService.getStreamAllMovies();
     }
 
+    @GetMapping("/all")
+    Flux<Movie> getAll() {
+        return movieService.getAllMovies();
+    }
+
     @PostMapping
     Mono<ResponseEntity<Movie>> addMovie(@RequestBody Movie movie) {
         return movieService.addMovie(movie)
